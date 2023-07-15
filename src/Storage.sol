@@ -14,5 +14,7 @@ contract Storage {
 
     constructor() {
         numMapping[1] = 75; //storage at keccak(0x0000000000000000000000000000001 + 0x0000000000000000000000000000002)
+        numMapping[31] = 98; //storage at keccak(hexadecimal of 31 + 0x0000000000000000000000000000002)
+        numMapping[41] = 18; //storage at keccak(hexadecimal of 41 + 0x0000000000000000000000000000002)
     }
 }
