@@ -3,6 +3,7 @@ pragma solidity 0.8.17;
 
 import "forge-std/Test.sol";
 import "../src/Storage.sol";
+import "../src/StorageSlot.sol";
 
 contract StorageTest is Test {
     using stdStorage for StdStorage;
@@ -31,10 +32,17 @@ contract StorageTest is Test {
 
         uint256 atSlot1 = uint256(vm.load(address(storageContract), bytes32(slot1)));
         uint256 atSlot31 = uint256(vm.load(address(storageContract), bytes32(slot31)));
-
         uint256 atSlot41 = uint256(vm.load(address(storageContract), bytes32(slot41)));
+
         assertEq(atSlot1, 75);
         assertEq(atSlot31, 98);
         assertEq(atSlot41, 18);
+    }
+
+    function test_insertingInfoInSlots() public {
+        StorageSlot.getUint256Slot(keccak256("testslot")).value = 256;
+        uint256 value = StorageSlot.getUint256Slot(keccak256("testslot")).value;
+
+        assertEq(value, 256);
     }
 }
